@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-color: #fff;
+
+    transition: background-color 0.2s linear;
+}
+
+body.dm, body.dm input {
+    background-color: #292c35;
+}
+
+/* #9b59b6 */
+
+body.dm p, 
+body.dm .header, 
+body.dm input::placeholder, 
+body.dm input {
+    color: #fff;
+}
+
+body.dm .timer {
+    background-color: rgb(103, 182, 103);
+    color: white;
+}
+
+body.dm legend {
+    background-color: #292c35;
+    color: rgb(228, 228, 228);
+}
+
+body.dm input:focus + legend {
+    outline-color: #0085d8;
+    color: #0085d8;
+}
+
+body.dm .signUpBtn {
+    background-color: #6f768d4b;
+    color: grey;
+}
+
+body.dm .dm-btn {
+    color: white;
+}
+
+body.dm .dm-btn:hover {
+    background-color: #6f768d4b;
+}
+
+body.dm .requirement.check {
+    background-color: rgb(103, 182, 103);
+}
+
+body.dm .requirement {
+    background-color: rgb(211, 112, 112);
+}
+
+body.dm .check, body.dm .x {
+    stroke: white;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    margin-top: 90px;
+    height: 25%;
+    justify-content: center;
+    width: 800px;
+    position: relative;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.left.active {
+    transform: translateX(-150px);
+    transition: transform 1s ease-in-out;
+}
+
+.right {
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    position: absolute;
+    bottom: 180px;
+    right: 0px;
+    height: fit-content;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.right.active {
+    visibility: visible;
+}
+
+.requirement {
+    background-color: lightcoral;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    align-items: center;
+    font-family: 'Montserrat';
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    width: 275px;
+    visibility: hidden;
+    padding: 10px 15px 10px 15px;
+}
+
+.requirement.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.requirement.check {
+    background-color: lightgreen;
+}
+
+.check, .x {
+    margin-right: 10px;
+}
+
+.check {
+    stroke: rgb(46, 175, 46);
+}
+
+.x {
+    stroke: rgb(218, 39, 39)
+}
+
+.requirement.check .check {
+    display: flex;
+}
+
+.requirement.check .x {
+    display: none;
+}
+
+.requirement:not(.check) .x {
+    display: flex;
+}
+
+.requirement:not(.check) .check {
+    display: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 24px;
+    font-family: 'Montserrat';
+}
+
+.timer {
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: lightgreen;
+    border-radius: 7px;
+    font-weight: 600;
+    width: 44px;
+    text-align: center;
+    color: black;
+    font-family: 'Montserrat';
+}
+
+input {
+    user-select: none;
+
+    border-radius: 5px;
+    border: none;
+    height: 35px;
+    padding-left: 10px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    outline: 2px rgb(228, 228, 228) solid;
+    width: 100%;
+    font-weight: 600;
+    
+    color: black;
+    transition: border-color 0.15s ease-in-out, outline-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, opacity 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+
+input:hover {
+    outline-color: rgb(189, 189, 189);
+}
+
+input:focus {
+    box-shadow: 0 2px 9px rgba(79, 131, 163, 0.3);
+    outline-color: #0074bd;
+}
+
+input:focus::placeholder {
+    opacity: 0;
+}
+
+input::placeholder {
+    transition: opacity 0.2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    opacity: 1;
+    font-weight: 600;
+}
+
+input:focus + legend {
+    opacity: 1;
+    color: #0074bd;
+}
+
+input:not(:placeholder-shown):not(:focus) + legend {
+    opacity: 1;
+    color: lightgrey;
+}
+
+fieldset {
+    position: relative;
+    border: none;
+    width: 100%;
+    display: flex;
+}
+
+legend {
+    font-weight: 600;
+    font-family: 'Montserrat';
+    margin-left: 10px;
+    position: absolute;
+    top: -10px;
+    font-size: 14px;
+    background-color: white;
+    padding: 0px 5px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, color 0.15s ease-in-out;
+}
+
+.confirm {
+    display: none;
+}
+
+.sign-up-btn {
+    padding: 10px;
+    cursor: not-allowed;
+    color: grey;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Montserrat';
+}
+
+.dm-btn {
+    margin-top: 100px;
+    width: 48px;
+    height: 48px;
+    border: solid 1px transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.dm-btn:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.a {
+    display: none;
+}
+

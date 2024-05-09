@@ -65,6 +65,20 @@ body.dm .check, body.dm .x {
     stroke: white;
 }
 
+body.dm .WIP { 
+    color: grey;
+}
+
+.WIP {
+    color: lightgray;
+    font-weight: 800;
+    font-family: 'Montserrat';
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    width: fit-content;
+}
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -103,12 +117,14 @@ body.dm .check, body.dm .x {
     position: absolute;
     bottom: 180px;
     right: 0px;
+    opacity: 0;
     height: fit-content;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out, background-color 0.5s ease-in-out;
+    transition: opacity 2s ease-in-out, transform 1s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .right.active {
     visibility: visible;
+    opacity: 1;
 }
 
 .requirement {
@@ -183,7 +199,7 @@ body.dm .check, body.dm .x {
     font-size: 20px;
     background-color: lightgreen;
     border-radius: 7px;
-    font-weight: 600;
+    font-weight: 800;
     width: 44px;
     text-align: center;
     color: black;

@@ -5,14 +5,17 @@ PLANS
 - 
 */
 
-const VERSION = "1.0.2";
+/*
+*/
+
+const VERSION = "1.1.0";
 
 var solved = false;
 var inputs = [];
 var currentRequirement = 1;
 
 function toggleLDMode() {
-    var DMBtn = document.getElementById('dm-btn');
+    var DMBtn = document.getElementsByClassName('dm-btn')[0];
     var DMBtnMoon = document.getElementById('dm-btn-moon');
     var DMBtnSun = document.getElementById('dm-btn-sun');
 
@@ -20,6 +23,34 @@ function toggleLDMode() {
         BODY.classList.toggle('dm')
         DMBtnMoon.classList.toggle('a');
         DMBtnSun.classList.toggle('a');
+        DMBtn.id = `${DMBtnMoon.classList.contains('a') ? 'Dark\xa0Mode' : 'Light\xa0Mode'}`
+    };
+}
+
+
+function toggleModes() {
+    var ModesBtn = document.getElementsByClassName('modes-btn')[0];
+    var ModesContent = document.getElementById('modes');
+    var LeaderboardContent = document.getElementById('ld');
+
+    ModesBtn.onclick = function() {
+        if (LeaderboardContent.classList.contains('active')) {
+            LeaderboardContent.classList.remove('active');
+        }
+        ModesContent.classList.toggle('active');
+    };
+}
+
+function toggleLeaderboard() {
+    var LeaderboardBtn = document.getElementsByClassName('leaderboard-btn')[0];
+    var LeaderboardContent = document.getElementById('ld');
+    var ModesContent = document.getElementById('modes');
+
+    LeaderboardBtn.onclick = function() {
+        if (ModesContent.classList.contains('active')) {
+            ModesContent.classList.remove('active');
+        }
+        LeaderboardContent.classList.toggle('active');
     };
 }
 
@@ -47,7 +78,7 @@ function timer(pace = 1000) {
 }
 
 const log = {
-    1: "a",
+    1: "anna",
     2: "b",
     3: "c",
     4: "d",
@@ -77,11 +108,26 @@ function updateRequirements(string) {
                 addRequirement();
                 right.style.transform = `translate(0%, ${((currentRequirement - 1) * 55)}px)`;
             } else {
-                console.log("game over");
+                var pwdInput = document.getElementById('password');
+                var pwdInputText = document.getElementById('password-text')
+                solved = true;
+                pwdInput.style.outlineColor = 'rgb(46, 175, 46)';
+                pwdInputText.style.color = 'rgb(46, 175, 46)';
+                pwdInput.disabled = true;
                 break;
                 // WIP
             }
         }
+    }
+}
+
+function confirmPassword(string) {
+    if (string.includes(Object.values(log)[i - 1])) {
+        req.classList.add('active', 'check');
+        boolList.push(true);
+    } else {
+        req.classList.remove('check');
+        boolList.push(false);
     }
 }
 
@@ -100,6 +146,29 @@ function addRequirement() {
     }
 }
 
+function hoverDetail() {
+    var btn = document.querySelectorAll('.btn:not(#Github)');
+
+    btn.forEach(button => {
+        button.onmouseover = function() {
+            var hoveredButton = document.getElementById(button.id)
+            var hoverText = document.createElement('span');
+
+            hoverText.textContent = `${button.id}`;
+            hoverText.className = 'btn-hover-text';
+
+            hoveredButton.appendChild(hoverText);
+        }
+
+        button.onmouseout = function() {
+            var hoveredButton = document.getElementById(button.id);
+            if (this.lastElementChild.tagName == 'SPAN') {
+                hoveredButton.removeChild(this.lastElementChild);
+            }
+        }
+    });
+}
+
 window.onload = function () {
     BODY = document.body;
 
@@ -111,6 +180,10 @@ window.onload = function () {
     timer(1000);
 
     toggleLDMode();
+    hoverDetail();
+
+    toggleModes();
+    toggleLeaderboard();
 
     pwdInput.oninput = function(x) {
         //x["data"] ? inputs.push(x["data"]) : inputs.pop();

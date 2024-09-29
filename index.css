@@ -7,7 +7,7 @@
 
 
 body {
-    background-color: #fff;
+    background-color: rgb(243, 244, 246);
 
     transition: background-color 0.2s linear;
 }
@@ -45,11 +45,16 @@ body.dm .signUpBtn {
     color: grey;
 }
 
-body.dm .dm-btn {
+body.dm .btn {
     color: white;
 }
 
-body.dm .dm-btn:hover {
+body.dm .btn:hover {
+    background-color: #6f768d4b;
+}
+
+body.dm .btn-hover-text {
+    color: white;
     background-color: #6f768d4b;
 }
 
@@ -61,22 +66,43 @@ body.dm .requirement {
     background-color: rgb(211, 112, 112);
 }
 
+body.dm .modes, body.dm .leaderboard {
+    background-color: #292c35;
+}
+
+body.dm .mode {
+    background-color: #292c35;
+    color: white;
+    border-color: #6f768d4b;
+}
+
+body.dm .mode svg {
+    opacity: 50%;
+}
+
+body.dm .mode-title {
+    color: white;
+    background-color: #292c35;
+}
+
+body.dm .mode:hover svg {
+    opacity: 70%;
+}
+
+body.dm .mode:hover {
+    border-color: rgb(139, 108, 239);
+}
+
 body.dm .check, body.dm .x {
     stroke: white;
 }
 
-body.dm .WIP { 
-    color: grey;
+body.dm .menu {
+    border-color: #6f768d4b;
 }
 
-.WIP {
-    color: lightgray;
-    font-weight: 800;
-    font-family: 'Montserrat';
-    font-size: 12px;
-    text-align: center;
-    display: flex;
-    width: fit-content;
+body.dm .WIP { 
+    color: grey;
 }
 
 .wrapper {
@@ -153,7 +179,7 @@ body.dm .WIP {
     background-color: lightgreen;
 }
 
-.check, .x {
+.requirement.active svg {
     margin-right: 10px;
 }
 
@@ -289,8 +315,19 @@ legend {
     font-family: 'Montserrat';
 }
 
-.dm-btn {
+.menu {
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: rgb(228, 228, 228) solid 3px;
+    padding-top: 10px;
+    width: 250px;
+}
+
+
+.btn {
+
     width: 48px;
     height: 48px;
     border: solid 1px transparent;
@@ -299,14 +336,190 @@ legend {
     justify-content: center;
     border-radius: 5px;
     background-color: transparent;
+    position: relative;
     transition: background-color 0.15s ease-in-out;
 }
 
-.dm-btn:hover {
-    background-color: rgb(235, 235, 235);
+.menu .btn:not(:last-child) {
+    margin-right: 20px;
+}
+
+.btn:hover {
+    background-color: #dadada5d;
+}
+
+.btn-hover-text {
+    background-color: #dadada5d;
+    position: absolute; 
+    top: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 7.5px;
+    border-radius: 5px;
+    transition: background-color 0.15s ease-in-out;
+    font-family: 'Montserrat';
+    font-weight: 600;
 }
 
 .a {
     display: none;
 }
 
+.modes, .leaderboard {
+    position: absolute;
+    background-color: rgb(243, 244, 246);
+    height: 400px;
+    width: 800px;
+    opacity: 0;
+    top: -100px;
+    visibility: hidden;
+    transition: all 0.2s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modes.active, .leaderboard.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mode {
+    display: flex;
+    width: 200px;
+    height: 300px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid rgb(228, 228, 228);
+    transition: all 0.1s ease-in-out;
+}
+
+.mode:not(:last-child) {
+    margin-right: 40px;
+}
+
+.mode svg {
+    position: absolute;
+    rotate: 20deg;
+    opacity: 10%;
+    scale: 7;
+    top: 125px;
+    right: 117px;
+    transition: all 0.1s ease-in-out;
+}
+
+.mode:hover svg {
+    opacity: 60%;
+}
+
+.mode:hover {
+    border-color: rgb(139, 108, 239);
+    border-width: 6px;
+}
+
+.mode-title {
+    position: absolute;
+    bottom: 0px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    background-color: rgb(228, 228, 228);
+    font-weight: 700;
+    font-size: 20px;
+    font-family: 'Montserrat';
+    transition: background-color 0.2s ease-in-out;
+}
+
+.mode-desc {
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.full {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    background-color: white;
+    width: 600px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid rgb(228, 228, 228);
+    visibility: hidden;
+}
+
+.first, .second, .third {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-weight: 600;
+    font-size: 30px;
+    font-family: 'Montserrat';
+}
+
+.first .block {
+    background-color: gold;
+    height: 50%;
+}
+
+.second .block {
+    background-color: silver;
+    height: 30%;
+}
+
+.third .block {
+    background-color: #CD7F32;
+    height: 20%;
+}
+
+.WIP {
+    color: lightgray;
+    font-weight: 800;
+    font-family: 'Montserrat';
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    width: fit-content;
+    margin-top: 5px;
+}
+
+.socials {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

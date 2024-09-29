@@ -1,13 +1,3 @@
-/*
-PLANS
-- add a countdown mode
-- add a confirm password at the end
-- 
-*/
-
-/*
-*/
-
 const VERSION = "1.1.0";
 
 var solved = false;

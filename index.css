@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@
 
 
 body {
-    background-color: rgb(243, 244, 246);
+    background-color: white;
 
     transition: background-color 0.2s linear;
 }
@@ -129,11 +131,12 @@ body.dm .WIP {
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
+    position: relative;
+    transition: transform 1s ease-in-out;
 }
 
 .left.active {
     transform: translateX(-150px);
-    transition: transform 1s ease-in-out;
 }
 
 .right {
@@ -145,7 +148,7 @@ body.dm .WIP {
     right: 0px;
     opacity: 0;
     height: fit-content;
-    transition: opacity 2s ease-in-out, transform 1s ease-in-out, background-color 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, transform 1s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .right.active {
@@ -244,7 +247,6 @@ input {
     outline: 2px rgb(228, 228, 228) solid;
     width: 100%;
     font-weight: 600;
-    
     color: black;
     transition: border-color 0.15s ease-in-out, outline-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, opacity 0.15s ease-in-out, color 0.15s ease-in-out;
 }
@@ -286,7 +288,25 @@ fieldset {
     width: 100%;
     display: flex;
 }
+/*
+.pwd-details {
+    position: absolute;
+    background-color: white;
+    height: max-content;
+    width: max-content;
+    right: 5px;
+    top: 5px;
+}
 
+.pwd-details span {
+    position: relative;
+    right: -5px;
+    color: red;
+    font-weight: 1000;
+    font-family: 'Montserrat';
+    font-size: 10px;
+}
+*/
 legend {
     font-weight: 600;
     font-family: 'Montserrat';
@@ -300,9 +320,24 @@ legend {
     transition: opacity 0.2s ease-in-out, color 0.15s ease-in-out;
 }
 
-.confirm {
-    display: none;
+input[type="password"] {
+    font-size: 24px;
+    font: caption;
+    font-family: 'pass';
+    font-style: normal;
 }
+
+.confirm-p {
+    display: none;
+    position: absolute;
+    bottom: 3px;
+}
+
+
+.confirm-p.active {
+    display: flex;
+}
+
 
 .sign-up-btn {
     padding: 10px;
@@ -313,6 +348,16 @@ legend {
     border-radius: 5px;
     border: none;
     font-family: 'Montserrat';
+    transition: transform 1s ease-in-out;
+}
+
+.sign-up-btn.confirm-phase {
+    transform: translateY(70px);
+}
+
+.sign-up-btn.end-phase {
+    color: white;
+    background-color: rgb(139, 108, 239);
 }
 
 .menu {
@@ -324,7 +369,6 @@ legend {
     padding-top: 10px;
     width: 250px;
 }
-
 
 .btn {
 
@@ -370,7 +414,7 @@ legend {
 
 .modes, .leaderboard {
     position: absolute;
-    background-color: rgb(243, 244, 246);
+    background-color: white;
     height: 400px;
     width: 800px;
     opacity: 0;

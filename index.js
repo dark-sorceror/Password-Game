@@ -1,6 +1,7 @@
-const VERSION = "1.1.0";
+const VERSION = "1.1.1";
 
-var solved = false;
+var gameOver = false;
+var passCreated = false;
 var inputs = [];
 var currentRequirement = 1;
 
@@ -16,7 +17,6 @@ function toggleLDMode() {
         DMBtn.id = `${DMBtnMoon.classList.contains('a') ? 'Dark\xa0Mode' : 'Light\xa0Mode'}`
     };
 }
-
 
 function toggleModes() {
     var ModesBtn = document.getElementsByClassName('modes-btn')[0];
@@ -44,6 +44,14 @@ function toggleLeaderboard() {
     };
 }
 
+function endGameButton() {
+    var signUpBtn = document.getElementById('sign-up-btn');
+
+    signUpBtn.onclick = function() {
+        gameOver = true;
+    };
+}
+
 function timer(pace = 1000) {
     var h = 0, m = 0, s = 0;
 
@@ -51,7 +59,7 @@ function timer(pace = 1000) {
         if (h) document.getElementById("timer").innerHTML = `${h}:${m}:${s}`;
         else document.getElementById("timer").innerHTML = `${m}:${s <= 9 ? '0' : ''}${s}`;
         
-        if (!solved) s++;
+        if (!gameOver) s++;
         else clearInterval(timer);
 
         if (s == 60) {
@@ -68,12 +76,49 @@ function timer(pace = 1000) {
 }
 
 const log = {
-    1: "anna",
+    1: "a",
     2: "b",
     3: "c",
     4: "d",
     5: "e"
 };
+
+function transitionConfirmation() {
+    var pwdInput = document.getElementById('password');
+    var pwdInputText = document.getElementById('password-text');
+    var confirmPwdField = document.getElementById('confirm-p');
+    
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+
+    var signUpBtn = document.getElementById('sign-up-btn');
+
+    left.classList.remove('active');
+    right.classList.remove('active');
+
+    passCreated = true;
+    pwdInput.style.outlineColor = 'rgb(46, 175, 46)';
+    pwdInputText.style.color = 'rgb(46, 175, 46)';
+    pwdInput.style.backgroundColor = 'white';
+    pwdInput.disabled = true;
+
+    confirmPwdField.classList.add('active');
+    signUpBtn.classList.add('confirm-phase');
+}
+
+function transitionEndGame() {
+    var confirmPwdInputText = document.getElementById('confirm-password-text');
+    var confirmPwdInput = document.getElementById('confirm-password');
+    var signUpBtn = document.getElementById('sign-up-btn');
+
+    confirmPwdInput.disabled = true;
+    confirmPwdInput.style.outlineColor = 'rgb(46, 175, 46)';
+    confirmPwdInput.style.backgroundColor = 'white';
+    confirmPwdInputText.style.color = 'rgb(46, 175, 46)';
+    endGameButton();
+    signUpBtn.classList.add('end-phase');
+    signUpBtn.style.cursor = 'default';
+}
 
 function updateRequirements(string) {
     var boolList = [];
@@ -98,12 +143,7 @@ function updateRequirements(string) {
                 addRequirement();
                 right.style.transform = `translate(0%, ${((currentRequirement - 1) * 55)}px)`;
             } else {
-                var pwdInput = document.getElementById('password');
-                var pwdInputText = document.getElementById('password-text')
-                solved = true;
-                pwdInput.style.outlineColor = 'rgb(46, 175, 46)';
-                pwdInputText.style.color = 'rgb(46, 175, 46)';
-                pwdInput.disabled = true;
+                transitionConfirmation();
                 break;
                 // WIP
             }
@@ -167,6 +207,9 @@ window.onload = function () {
     var left = document.getElementById('left');
     var right = document.getElementById('right');
 
+    var confirmPwdField = document.getElementById('confirm-p');
+    var confirmPwdInput = document.getElementById('confirm-password');
+
     timer(1000);
 
     toggleLDMode();
@@ -188,6 +231,12 @@ window.onload = function () {
         var currentReq = document.getElementById(currentRequirement);
 
         currentReq.classList.add('active');
+    }
+
+    confirmPwdInput.oninput = function(x) {
+        if (confirmPwdInput.value == pwdInput.value) {
+            transitionEndGame();
+        }
     }
 
 };
